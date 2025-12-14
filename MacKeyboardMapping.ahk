@@ -12,54 +12,56 @@ SetWorkingDir %A_ScriptDir%
 ; 核心映射：将左Alt映射为Cmd键的功能
 ; ============================================
 
-; 文本编辑快捷键
-LAlt & c::Send ^c        ; Cmd+C → Ctrl+C (复制)
-LAlt & v::Send ^v        ; Cmd+V → Ctrl+V (粘贴)
-LAlt & x::Send ^x        ; Cmd+X → Ctrl+X (剪切)
-LAlt & a::Send ^a        ; Cmd+A → Ctrl+A (全选)
-LAlt & s::Send ^s        ; Cmd+S → Ctrl+S (保存)
-LAlt & z::Send ^z        ; Cmd+Z → Ctrl+Z (撤销)
-LAlt & f::Send ^f        ; Cmd+F → Ctrl+F (查找)
-LAlt & n::Send ^n        ; Cmd+N → Ctrl+N (新建)
-LAlt & o::Send ^o        ; Cmd+O → Ctrl+O (打开)
-LAlt & p::Send ^p        ; Cmd+P → Ctrl+P (打印)
-LAlt & w::Send ^w        ; Cmd+W → Ctrl+W (关闭窗口)
-LAlt & t::Send ^t        ; Cmd+T → Ctrl+T (新建标签)
-LAlt & q::Send !{F4}     ; Cmd+Q → Alt+F4 (退出程序)
+; 文本编辑快捷键 - 使用!表示Alt键，只映射纯Alt组合
+!c::Send ^c        ; Alt+C → Ctrl+C (复制)
+!v::Send ^v        ; Alt+V → Ctrl+V (粘贴)
+!x::Send ^x        ; Alt+X → Ctrl+X (剪切)
+!a::Send ^a        ; Alt+A → Ctrl+A (全选)
+!s::Send ^s        ; Alt+S → Ctrl+S (保存)
+!z::Send ^z        ; Alt+Z → Ctrl+Z (撤销)
+!f::Send ^f        ; Alt+F → Ctrl+F (查找)
+!n::Send ^n        ; Alt+N → Ctrl+N (新建)
+!o::Send ^o        ; Alt+O → Ctrl+O (打开)
+!p::Send ^p        ; Alt+P → Ctrl+P (打印)
+!w::Send ^w        ; Alt+W → Ctrl+W (关闭窗口)
+!t::Send ^t        ; Alt+T → Ctrl+T (新建标签)
+!q::Send !{F4}     ; Alt+Q → Alt+F4 (退出程序)
 
 ; 撤销/重做
-LAlt & y::Send ^y        ; Cmd+Y → Ctrl+Y (重做)
-; Cmd+Shift+Z → Ctrl+Y (重做) - 使用独立热键定义
+!y::Send ^y        ; Alt+Y → Ctrl+Y (重做)
+
+; Alt+Shift+Z → Ctrl+Y (重做)
 +!z::Send ^y
 
 ; 浏览器和资源管理器快捷键
-LAlt & r::Send ^r        ; Cmd+R → Ctrl+R (刷新)
-LAlt & l::Send ^l        ; Cmd+L → Ctrl+L (地址栏)
-LAlt & h::Send ^h        ; Cmd+H → Ctrl+H (历史记录)
-LAlt & d::Send ^d        ; Cmd+D → Ctrl+D (添加书签)
-; Cmd+Shift+T → Ctrl+Shift+T (恢复关闭的标签) - 使用独立热键定义
-+!t::Send ^+t
+!r::Send ^r        ; Alt+R → Ctrl+R (刷新)
+!l::Send ^l        ; Alt+L → Ctrl+L (地址栏)
+!h::Send ^h        ; Alt+H → Ctrl+H (历史记录)
+!d::Send ^d        ; Alt+D → Ctrl+D (添加书签)
+
+; Alt+Shift+T → Ctrl+Shift+T (恢复关闭的标签)
+; 注意：这里需要特殊处理，因为!t已被占用
+; +!t::Send ^+t  ; 此行已注释，因为与!t冲突
 
 ; 标签页切换 (已禁用，保留原生Alt+Tab窗口切换功能)
 ; LAlt & Tab::Send ^{Tab}      ; Cmd+Tab → Ctrl+Tab (下一个标签) - 已注释
 ; +!Tab::Send ^+{Tab}          ; Cmd+Shift+Tab → Ctrl+Shift+Tab (上一个标签) - 已注释
 
 ; 数字键快捷键(浏览器标签页跳转)
-LAlt & 1::Send ^1
-LAlt & 2::Send ^2
-LAlt & 3::Send ^3
-LAlt & 4::Send ^4
-LAlt & 5::Send ^5
-LAlt & 6::Send ^6
-LAlt & 7::Send ^7
-LAlt & 8::Send ^8
-LAlt & 9::Send ^9
+!1::Send ^1
+!2::Send ^2
+; !3 和 !4 被截图快捷键占用，见下方截图部分
+!5::Send ^5
+!6::Send ^6
+!7::Send ^7
+!8::Send ^8
+!9::Send ^9
 
 ; 光标移动(Mac风格)
-LAlt & Left::Send ^{Left}    ; Cmd+← → Ctrl+← (按词移动)
-LAlt & Right::Send ^{Right}  ; Cmd+→ → Ctrl+→ (按词移动)
-LAlt & Up::Send ^{Home}      ; Cmd+↑ → Ctrl+Home (文档开头)
-LAlt & Down::Send ^{End}     ; Cmd+↓ → Ctrl+End (文档末尾)
+!Left::Send ^{Left}    ; Alt+← → Ctrl+← (按词移动)
+!Right::Send ^{Right}  ; Alt+→ → Ctrl+→ (按词移动)
+!Up::Send ^{Home}      ; Alt+↑ → Ctrl+Home (文档开头)
+!Down::Send ^{End}     ; Alt+↓ → Ctrl+End (文档末尾)
 
 ; 选择文本(Mac风格) - 使用独立热键定义
 +!Left::Send ^+{Left}     ; Cmd+Shift+← (选择到词首)
@@ -68,7 +70,7 @@ LAlt & Down::Send ^{End}     ; Cmd+↓ → Ctrl+End (文档末尾)
 +!Down::Send ^+{End}      ; Cmd+Shift+↓ (选择到文档末尾)
 
 ; 删除操作(Mac风格)
-LAlt & Backspace::Send ^{Backspace}  ; Cmd+Backspace → 删除整个词
+!Backspace::Send ^{Backspace}  ; Alt+Backspace → 删除整个词
 
 ; ============================================
 ; 保留原有的Windows快捷键功能
@@ -85,21 +87,21 @@ RAlt::Send {RAlt}
 ; 截图快捷键(Mac风格)
 ; ============================================
 
-; Cmd+Shift+3 → 全屏截图 - 使用独立热键定义
+; Alt+Shift+3 → 全屏截图
 +!3::Send #{PrintScreen}
 
-; Cmd+Shift+4 → 区域截图 - 使用独立热键定义
+; Alt+Shift+4 → 区域截图
 +!4::Send #+s
 
 ; ============================================
 ; 窗口管理
 ; ============================================
 
-; Cmd+M → 最小化窗口
-LAlt & m::WinMinimize, A
+; Alt+M → 最小化窗口
+!m::WinMinimize, A
 
-; Cmd+` → 同一应用的窗口切换
-LAlt & `::Send !{Esc}
+; Alt+` → 同一应用的窗口切换
+!`::Send !{Esc}
 
 ; ============================================
 ; 特殊应用优化(可选)
