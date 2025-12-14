@@ -40,10 +40,9 @@ LAlt & d::Send ^d        ; Cmd+D → Ctrl+D (添加书签)
 ; Cmd+Shift+T → Ctrl+Shift+T (恢复关闭的标签) - 使用独立热键定义
 +!t::Send ^+t
 
-; 标签页切换
-LAlt & Tab::Send ^{Tab}      ; Cmd+Tab → Ctrl+Tab (下一个标签)
-; Cmd+Shift+Tab → Ctrl+Shift+Tab (上一个标签) - 使用独立热键定义
-+!Tab::Send ^+{Tab}
+; 标签页切换 (已禁用，保留原生Alt+Tab窗口切换功能)
+; LAlt & Tab::Send ^{Tab}      ; Cmd+Tab → Ctrl+Tab (下一个标签) - 已注释
+; +!Tab::Send ^+{Tab}          ; Cmd+Shift+Tab → Ctrl+Shift+Tab (上一个标签) - 已注释
 
 ; 数字键快捷键(浏览器标签页跳转)
 LAlt & 1::Send ^1
